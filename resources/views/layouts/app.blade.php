@@ -1,36 +1,48 @@
-<!doctype html>
-<html @php(language_attributes())>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    @php(do_action('get_header'))
-    @php(wp_head())
-  </head>
+@if (is_user_logged_in())
+  @if (is_admin_bar_showing())
+    @php($topPaddingMain = 'pt-8 sm:pt-20')
+  @else
+    @php($topPaddingMain = 'sm:pt-[26px]')
+  @endif
 
-  <body @php(body_class())>
-    @php(wp_body_open())
+  <!doctype html>
+  <html @php(language_attributes())>
+    <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      @php(do_action('get_header'))
+      @php(wp_head())
+    </head>
 
-    <div id="app">
-      <a class="sr-only focus:not-sr-only" href="#main">
-        {{ __('Skip to content', 'sage') }}
-      </a>
+    <body @php(body_class('bg-gray-100 text-gray-800'))>
+      @php(wp_body_open())
 
-      @include('sections.header')
+      <div id="app">
+        <a class="sr-only focus:not-sr-only" href="#main">
+          {{ __('Skip to content') }}
+        </a>
 
-      <main id="main" class="main">
-        @yield('content')
-      </main>
+        @include('sections.header')
 
-      @hasSection('sidebar')
-        <aside class="sidebar">
-          @yield('sidebar')
-        </aside>
-      @endif
+        <main id="main" class="main container mx-auto flex flex-col justify-center {{ $topPaddingMain }} pb-56 md:pb-32">
+          @yield('content')
+        </main>
 
-      @include('sections.footer')
-    </div>
+        @hasSection('sidebar')
+          <aside class="sidebar">
+            @yield('sidebar')
+          </aside>
+        @endif
 
-    @php(do_action('get_footer'))
-    @php(wp_footer())
-  </body>
-</html>
+        @include('sections.footer')
+      </div>
+
+      @php(do_action('get_footer'))
+      @php(wp_footer())
+    </body>
+  </html>
+@else
+  <script type="text/javascript">
+      window.location = "@php(printf(wp_login_url()))";
+  </script>
+@endif

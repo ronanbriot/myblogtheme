@@ -206,59 +206,9 @@
           "slug": "zinc-950"
         },
         {
-          "color": "#fafafa",
-          "name": "Neutral 50",
-          "slug": "neutral-50"
-        },
-        {
-          "color": "#f5f5f5",
-          "name": "Neutral 100",
-          "slug": "neutral-100"
-        },
-        {
-          "color": "#e5e5e5",
-          "name": "Neutral 200",
-          "slug": "neutral-200"
-        },
-        {
-          "color": "#d4d4d4",
-          "name": "Neutral 300",
-          "slug": "neutral-300"
-        },
-        {
-          "color": "#a3a3a3",
-          "name": "Neutral 400",
-          "slug": "neutral-400"
-        },
-        {
-          "color": "#737373",
-          "name": "Neutral 500",
-          "slug": "neutral-500"
-        },
-        {
-          "color": "#525252",
-          "name": "Neutral 600",
-          "slug": "neutral-600"
-        },
-        {
-          "color": "#404040",
-          "name": "Neutral 700",
-          "slug": "neutral-700"
-        },
-        {
-          "color": "#262626",
-          "name": "Neutral 800",
-          "slug": "neutral-800"
-        },
-        {
-          "color": "#171717",
-          "name": "Neutral 900",
-          "slug": "neutral-900"
-        },
-        {
-          "color": "#0a0a0a",
-          "name": "Neutral 950",
-          "slug": "neutral-950"
+          "color": "var(--fallback-n,oklch(var(--n)/1))",
+          "name": "Neutral",
+          "slug": "neutral"
         },
         {
           "color": "#fafaf9",
@@ -1249,6 +1199,161 @@
           "color": "#4c0519",
           "name": "Rose 950",
           "slug": "rose-950"
+        },
+        {
+          "color": "var(--fallback-p,oklch(var(--p)/1))",
+          "name": "Primary",
+          "slug": "primary"
+        },
+        {
+          "color": "var(--fallback-pc,oklch(var(--pc)/1))",
+          "name": "Primary-content",
+          "slug": "primary-content"
+        },
+        {
+          "color": "var(--fallback-s,oklch(var(--s)/1))",
+          "name": "Secondary",
+          "slug": "secondary"
+        },
+        {
+          "color": "var(--fallback-sc,oklch(var(--sc)/1))",
+          "name": "Secondary-content",
+          "slug": "secondary-content"
+        },
+        {
+          "color": "var(--fallback-a,oklch(var(--a)/1))",
+          "name": "Accent",
+          "slug": "accent"
+        },
+        {
+          "color": "var(--fallback-ac,oklch(var(--ac)/1))",
+          "name": "Accent-content",
+          "slug": "accent-content"
+        },
+        {
+          "color": "var(--fallback-nc,oklch(var(--nc)/1))",
+          "name": "Neutral-content",
+          "slug": "neutral-content"
+        },
+        {
+          "color": "var(--fallback-b1,oklch(var(--b1)/1))",
+          "name": "Base-100",
+          "slug": "base-100"
+        },
+        {
+          "color": "var(--fallback-b2,oklch(var(--b2)/1))",
+          "name": "Base-200",
+          "slug": "base-200"
+        },
+        {
+          "color": "var(--fallback-b3,oklch(var(--b3)/1))",
+          "name": "Base-300",
+          "slug": "base-300"
+        },
+        {
+          "color": "rgba(75, 85, 99, 1)",
+          "name": "Base-content",
+          "slug": "base-content"
+        },
+        {
+          "color": "var(--fallback-bs,oklch(var(--bs)/1))",
+          "name": "Base-shadow",
+          "slug": "base-shadow"
+        },
+        {
+          "color": "var(--fallback-in,oklch(var(--in)/1))",
+          "name": "Info",
+          "slug": "info"
+        },
+        {
+          "color": "var(--fallback-inc,oklch(var(--inc)/1))",
+          "name": "Info-content",
+          "slug": "info-content"
+        },
+        {
+          "color": "var(--fallback-su,oklch(var(--su)/1))",
+          "name": "Success",
+          "slug": "success"
+        },
+        {
+          "color": "var(--fallback-suc,oklch(var(--suc)/1))",
+          "name": "Success-content",
+          "slug": "success-content"
+        },
+        {
+          "color": "var(--fallback-wa,oklch(var(--wa)/1))",
+          "name": "Warning",
+          "slug": "warning"
+        },
+        {
+          "color": "var(--fallback-wac,oklch(var(--wac)/1))",
+          "name": "Warning-content",
+          "slug": "warning-content"
+        },
+        {
+          "color": "var(--fallback-er,oklch(var(--er)/1))",
+          "name": "Error",
+          "slug": "error"
+        },
+        {
+          "color": "var(--fallback-erc,oklch(var(--erc)/1))",
+          "name": "Error-content",
+          "slug": "error-content"
+        },
+        {
+          "color": "#fafafa",
+          "name": "Neutral-50",
+          "slug": "neutral-50"
+        },
+        {
+          "color": "#f5f5f5",
+          "name": "Neutral-100",
+          "slug": "neutral-100"
+        },
+        {
+          "color": "#e5e5e5",
+          "name": "Neutral-200",
+          "slug": "neutral-200"
+        },
+        {
+          "color": "#d4d4d4",
+          "name": "Neutral-300",
+          "slug": "neutral-300"
+        },
+        {
+          "color": "#a3a3a3",
+          "name": "Neutral-400",
+          "slug": "neutral-400"
+        },
+        {
+          "color": "#737373",
+          "name": "Neutral-500",
+          "slug": "neutral-500"
+        },
+        {
+          "color": "#525252",
+          "name": "Neutral-600",
+          "slug": "neutral-600"
+        },
+        {
+          "color": "#404040",
+          "name": "Neutral-700",
+          "slug": "neutral-700"
+        },
+        {
+          "color": "#262626",
+          "name": "Neutral-800",
+          "slug": "neutral-800"
+        },
+        {
+          "color": "#171717",
+          "name": "Neutral-900",
+          "slug": "neutral-900"
+        },
+        {
+          "color": "#0a0a0a",
+          "name": "Neutral-950",
+          "slug": "neutral-950"
         }
       ]
     },
@@ -1274,8 +1379,8 @@
       "customFontSize": false,
       "fontFamilies": [
         {
-          "fontFamily": "ui-sans-serif,system-ui,sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\",\"Segoe UI Symbol\",\"Noto Color Emoji\"",
-          "name": "Ui-sans-serif",
+          "fontFamily": "\"Schoolbell-Regular\",ui-sans-serif,system-ui,sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\",\"Segoe UI Symbol\",\"Noto Color Emoji\"",
+          "name": "\"Schoolbell-Regular\"",
           "slug": "sans"
         },
         {

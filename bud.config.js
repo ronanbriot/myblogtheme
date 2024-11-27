@@ -23,7 +23,7 @@ export default async (app) => {
    *
    * @see {@link https://bud.js.org/reference/bud.setPublicPath}
    */
-  app.setPublicPath('/app/themes/sage/public/');
+  app.setPublicPath('/app/themes/myblogtheme/public/');
 
   /**
    * Development server settings
@@ -34,7 +34,7 @@ export default async (app) => {
    */
   app
     .setUrl('http://localhost:3000')
-    .setProxyUrl('http://example.test')
+    .setProxyUrl('https://my-blog.kakii.fr/')
     .watch(['resources/views', 'app']);
 
   /**

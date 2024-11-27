@@ -20,8 +20,11 @@
   },
   "devDependencies": {
     "@roots/bud": "6.23.3",
+    "@roots/bud-sass": "^6.23.3",
     "@roots/bud-tailwindcss": "6.23.3",
     "@roots/sage": "6.23.3"
   },
-  "dependencies": {}
+  "dependencies": {
+    "flyonui": "^1.1.0"
+  }
 }

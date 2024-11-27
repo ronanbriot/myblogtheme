@@ -1,4 +1,5 @@
 <time class="dt-published" datetime="{{ get_post_time('c', true) }}">
+  <span>{{ __('Posted', 'sage') }}</span>
   {{ get_the_date() }}
 </time>
 
