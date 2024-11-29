@@ -178,8 +178,13 @@ add_action( 'save_post', function ($post_id, $post, $update) {
     }
 
     if (isset($slideshowToRemove) && !wp_delete_attachment($slideshowToRemove) instanceof WP_Post) {
-        var_dump('jb,h gchf');
-        die;
         return new WP_Error();
     }
 }, 10, 3 );
+
+add_action( 'init', function () {
+    $post_type_object = get_post_type_object( 'post' );
+    $post_type_object->template = array(
+        array( 'core/gallery' ),
+    );
+} );
