@@ -6,9 +6,6 @@
 
 namespace App;
 
-use WP_Error;
-use WP_Post;
-
 use function Roots\bundle;
 
 /**
@@ -131,23 +128,23 @@ add_action('after_setup_theme', function () {
 });
 
 // Replace Posts label as Articles in Admin Panel 
-add_action( 'init', function () {
-        global $wp_post_types;
-        $labels = &$wp_post_types['post']->labels;
-        $labels->name = 'Évènements';
-        $labels->singular_name = 'Évènement';
-        $labels->add_new = 'Ajouter';
-        $labels->add_new_item = 'Ajouter un nouvel évènement';
-        $labels->edit_item = 'Editer évènement';
-        $labels->new_item = 'Nouvel évènement';
-        $labels->view_item = 'Voir évènement';
-        $labels->search_items = 'Rechercher évènement';
-        $labels->not_found = 'Aucun évènement trouvé';
-        $labels->not_found_in_trash = 'Aucun évènement trouvé dans la corbeille';
-        $labels->name_admin_bar = 'Ajouter un nouvel évènement';
+add_action('init', function () {
+    global $wp_post_types;
+    $labels = &$wp_post_types['post']->labels;
+    $labels->name = 'Évènements';
+    $labels->singular_name = 'Évènement';
+    $labels->add_new = 'Ajouter';
+    $labels->add_new_item = 'Ajouter un nouvel évènement';
+    $labels->edit_item = 'Editer évènement';
+    $labels->new_item = 'Nouvel évènement';
+    $labels->view_item = 'Voir évènement';
+    $labels->search_items = 'Rechercher évènement';
+    $labels->not_found = 'Aucun évènement trouvé';
+    $labels->not_found_in_trash = 'Aucun évènement trouvé dans la corbeille';
+    $labels->name_admin_bar = 'Ajouter un nouvel évènement';
 });
 
-add_action( 'admin_menu', function () {
+add_action('admin_menu', function () {
     global $menu;
     global $submenu;
     $menu[5][0] = 'Évènements';
@@ -156,35 +153,28 @@ add_action( 'admin_menu', function () {
     echo '';
 });
 
-add_action( 'save_post', function ($post_id, $post, $update) {
-	
-	// Only set for post_type = post!
-	if ( 'post' !== $post->post_type ) {
-		return;
-	}
-	
-	// Get the default term using the slug, its more portable!
-	$attachments = get_attached_media('video', $post);
-
-    
-    if (!empty($attachments)) {
-        foreach ($attachments as $slideshow) {
-            $pattern = '/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i';
-            if (preg_match($pattern, $slideshow->post_name)) {
-                $slideshowToRemove = $slideshow->ID;
-                break;
-            }
-        }
-    }
-
-    if (isset($slideshowToRemove) && !wp_delete_attachment($slideshowToRemove) instanceof WP_Post) {
-        return new WP_Error();
-    }
-}, 10, 3 );
-
-add_action( 'init', function () {
-    $post_type_object = get_post_type_object( 'post' );
+add_action('init', function () {
+    $post_type_object = get_post_type_object('post');
     $post_type_object->template = array(
-        array( 'core/gallery' ),
+        array('core/gallery'),
     );
-} );
+});
+
+// Activate WordPress Maintenance Mode
+add_action('init', function () {
+    if (
+        $_SERVER['REQUEST_URI'] !== '/'
+        && !str_contains($_SERVER['REQUEST_URI'], '/wp/wp-login.php')
+        && !current_user_can('administrator') // rule to allow admins
+        && WP_ENV === 'development'
+        && 'PostmanRuntime/7.42.0' !== $_SERVER['HTTP_USER_AGENT'] // postman
+        && 'Shotstack-Webhook/1.0' !== $_SERVER['HTTP_USER_AGENT'] // shotstack
+        && $_SERVER['REMOTE_ADDR'] !== '127.0.0.1' // wp-cli
+    ) {
+        wp_die(
+            __( 'Briefly unavailable for scheduled maintenance. Check back in a minute.', 'sage' ),
+            __( 'Maintenance' ),
+            503
+        );
+    }
+});
