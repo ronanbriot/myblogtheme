@@ -1,9 +1,4 @@
-@if (is_user_logged_in())
-  @if (is_admin_bar_showing())
-    @php($topPaddingMain = 'pt-8 sm:pt-20')
-  @else
-    @php($topPaddingMain = 'sm:pt-[26px]')
-  @endif
+
 
   <!doctype html>
   <html @php(language_attributes())>
@@ -14,7 +9,7 @@
       @php(wp_head())
     </head>
 
-    <body @php(body_class('bg-gray-100 text-gray-800'))>
+    <body @php(body_class('bg-gray-100 text-gray-800 min-h-screen'))>
       @php(wp_body_open())
 
       <div id="app">
@@ -24,8 +19,17 @@
 
         @include('sections.header')
 
+        @if (is_admin_bar_showing())
+          @php($topPaddingMain = 'pt-8 sm:pt-20')
+        @else
+          @php($topPaddingMain = 'sm:pt-[26px]')
+        @endif
         <main id="main" class="main container mx-auto flex flex-col justify-center {{ $topPaddingMain }} pb-56 md:pb-32">
-          @yield('content')
+          @if (is_user_logged_in())
+            @yield('content')
+          @else
+            @include('forms.login')
+          @endif
         </main>
 
         @hasSection('sidebar')
@@ -41,8 +45,3 @@
       @php(wp_footer())
     </body>
   </html>
-@else
-  <script type="text/javascript">
-      window.location = "@php(printf(wp_login_url()))";
-  </script>
-@endif

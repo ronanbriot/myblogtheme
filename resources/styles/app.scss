@@ -1,12 +1,13 @@
 @tailwind base;
-@tailwind components;
-@tailwind utilities;
 
 @layer base {
     html {
         font-size: 1.4rem;
     }
 }
+
+@tailwind components;
+@tailwind utilities;
 
 @font-face {
     font-family: 'Schoolbell-Regular';

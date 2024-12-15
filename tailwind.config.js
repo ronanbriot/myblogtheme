@@ -1,7 +1,7 @@
 /** @type {import('tailwindcss').Config} config */
 
 import flyonui from 'flyonui';
-import defaultTheme from 'tailwindcss/defaultTheme.js'
+import defaultTheme from 'tailwindcss/defaultTheme.js';
 
 const config = {
   content: ['./app/**/*.php', './resources/**/*.{php,vue,js}'],
@@ -41,6 +41,9 @@ const config = {
   plugins: [
     flyonui
   ],
+  flyonui: {
+    themes: ["light", "dark"]
+  }
 };
 
 export default config;
