@@ -11,14 +11,28 @@ namespace App;
  *
  * @return string
  */
-add_filter('excerpt_more', function () {
+add_filter('excerpt_more', function (): string {
     return sprintf(' &hellip; <a href="%s">%s</a>', get_permalink(), __('Continued', 'sage'));
 });
 
-// Add mp4 extension for attachment come from shotstack
-add_filter("image_sideload_extensions", function ($allowed_extensions, $file) {
-    if (strpos($file, 'https://shotstack-api-stage-output.s3-ap-southeast-2.amazonaws.com') !== false) {
+/**
+ * Add mp4 extension for attachment come from shotstack.
+ *
+ * @return array
+ */
+add_filter("image_sideload_extensions", function ($allowed_extensions, $file): array {
+    if (strpos($file, 'shotstack-api-stage-output') !== false) {
         $allowed_extensions[] = 'mp4';
     }
     return $allowed_extensions;
 }, 10, 2);
+
+/**
+ * Remove test on background updates.
+ *
+ * @return array
+ */
+add_filter('site_status_tests', function ($tests): array {
+    unset($tests['async']['background_updates']);
+    return $tests;
+});
