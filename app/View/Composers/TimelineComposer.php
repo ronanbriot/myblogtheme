@@ -30,22 +30,13 @@ class TimelineComposer extends Composer
     {
         $args = array(
             'post_type' => 'post',
-            'meta_key' => 'event_date',
-            'orderby' => 'meta_value',
-            'order' => 'DESC',
-            'meta_query' => array(
-                array(
-                    'key' => 'event_date',
-                    // 'type' => 'DATETIME'
-                    // 'value' => array(3, 4),
-                    // 'compare' => 'IN',
-                ),
-            ),
+            'orderby' => 'post_date',
+            'order' => 'DESC'
         );
         $query = new WP_Query($args);
 
         foreach ($query->posts as $key => $post) {
-            $eventDate = get_post_meta($post->ID)['event_date'][0];
+            $eventDate = $post->post_date;
             $eventDateFr = new DateTime($eventDate);
             $fmt = datefmt_create(
                 'fr-FR',

@@ -112,7 +112,7 @@ class Post extends Composer
     public function getEventDate(): string {
             global $post;
 
-            $eventDate = get_post_meta($post->ID, 'event_date')[0];
+            $eventDate = $post->post_date;
             $date = new DateTime($eventDate);
             $fmt = new IntlDateFormatter(
                 'fr_FR',
@@ -121,10 +121,7 @@ class Post extends Composer
                 'America/Los_Angeles',
                 IntlDateFormatter::GREGORIAN,
                 'EEEE d LLLL r'
-                // 'MM/dd/yyyy'
             );
-            // dd($fmt->format($date));
             return $fmt->format($date);
-            // dd(get_post_meta($post->ID, 'event_date'));
     }
 }
