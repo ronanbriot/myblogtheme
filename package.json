@@ -25,6 +25,7 @@
     "@roots/sage": "6.23.3"
   },
   "dependencies": {
-    "flyonui": "^1.1.0"
+    "flyonui": "^1.1.0",
+    "glightbox": "^3.3.1"
   }
 }

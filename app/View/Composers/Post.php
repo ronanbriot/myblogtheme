@@ -5,6 +5,7 @@ namespace App\View\Composers;
 use DateTime;
 use IntlDateFormatter;
 use Roots\Acorn\View\Composer;
+use WP_Post;
 
 class Post extends Composer
 {
@@ -112,16 +113,19 @@ class Post extends Composer
     public function getEventDate(): string {
             global $post;
 
-            $eventDate = $post->post_date;
-            $date = new DateTime($eventDate);
-            $fmt = new IntlDateFormatter(
-                'fr_FR',
-                IntlDateFormatter::FULL,
-                IntlDateFormatter::FULL,
-                'America/Los_Angeles',
-                IntlDateFormatter::GREGORIAN,
-                'EEEE d LLLL r'
-            );
-            return $fmt->format($date);
+            if ($post instanceof WP_Post) {
+                $eventDate = $post->post_date;
+                $date = new DateTime($eventDate);
+                $fmt = new IntlDateFormatter(
+                    'fr_FR',
+                    IntlDateFormatter::FULL,
+                    IntlDateFormatter::FULL,
+                    'America/Los_Angeles',
+                    IntlDateFormatter::GREGORIAN,
+                    'EEEE d LLLL r'
+                );
+                return $fmt->format($date);
+            }
+            return '';
     }
 }

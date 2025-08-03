@@ -9,7 +9,69 @@
 @tailwind components;
 @tailwind utilities;
 
+// GLightbox CSS
+@import 'glightbox/dist/css/glightbox.min.css';
+
 @font-face {
     font-family: 'Schoolbell-Regular';
     src: url('../fonts/Schoolbell-Regular.ttf') format('truetype');
+}
+
+// GLightbox custom styles to match theme
+.glightbox-clean {
+  .gslide-description {
+    @apply bg-white/90 backdrop-blur-sm text-gray-800 p-4 rounded-lg shadow-lg;
+  }
+  
+  .gprev,
+  .gnext {
+    @apply text-white hover:text-primary transition-colors duration-200;
+    
+    svg {
+      @apply w-8 h-8;
+    }
+  }
+  
+  .gclose {
+    @apply text-white hover:text-red-400 transition-colors duration-200;
+    
+    svg {
+      @apply w-8 h-8;
+    }
+  }
+  
+  .gslide-media {
+    @apply rounded-lg overflow-hidden shadow-2xl;
+  }
+  
+  .gslide-image img {
+    @apply max-h-[90vh] w-auto mx-auto;
+  }
+  
+  // Dark theme support
+  html[data-theme="dark"] & {
+    .gslide-description {
+      @apply bg-gray-800/90 text-white;
+    }
+  }
+  
+  // Loading animation
+  .gloader {
+    @apply border-primary;
+  }
+  
+  // Mobile optimizations
+  @media (max-width: 768px) {
+    .gslide-description {
+      @apply text-sm p-3;
+    }
+    
+    .gprev,
+    .gnext,
+    .gclose {
+      svg {
+        @apply w-6 h-6;
+      }
+    }
+  }
 }

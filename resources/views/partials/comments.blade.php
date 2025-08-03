@@ -2,6 +2,7 @@
     // Get only the approved comments
     $args = array(
       'status' => 'approve',
+      'post_id' => get_the_ID(),
     );
 
     // The comment Query
@@ -17,8 +18,6 @@
       </x-alert>
     @endif
 
-    @php(comment_form($commentFormArgs))
-
     @if ($responses)
       <h2>
         {!! $title !!}
@@ -28,7 +27,6 @@
         {{-- {!! $responses !!} --}}
         @if ($comments)
             @foreach ($comments as $comment)
-              {{-- @dump($comment) --}}
               @if ($comment->user_id == get_current_user_id())
                 <div class="chat chat-sender">
                   <div class="chat-avatar avatar">
@@ -101,5 +99,7 @@
         {!! __('Comments are closed.', 'sage') !!}
       </x-alert>
     @endif
+
+    @php(comment_form($commentFormArgs))
   </section>
 @endif

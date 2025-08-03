@@ -60,13 +60,13 @@ msgstr ""
 msgctxt "comments title"
 msgid "%1$s response to &ldquo;%2$s&rdquo;"
 msgid_plural "%1$s responses to &ldquo;%2$s&rdquo;"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1$s réponse à &ldquo;%2$s&rdquo;"
+msgstr[1] "%1$s réponses à &ldquo;%2$s&rdquo;"
 
 #: app/View/Composers/Comments.php:46
 msgctxt "comments title"
 msgid "One"
-msgstr ""
+msgstr "Une"
 
 #: app/View/Composers/Comments.php:81
 msgid "&larr; Older comments"

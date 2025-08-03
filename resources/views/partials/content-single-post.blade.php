@@ -9,7 +9,7 @@
 
   <div class="e-content">
     @if ($eventSlideshowUrl === 'placeholder')
-      <div class="radial-progress bg-primary text-primary-content border-primary border-4" style="--value:70;" role="progressbar" aria-label="Primary Radial Progressbar">70%</div>
+      {{-- <div class="radial-progress bg-primary text-primary-content border-primary border-4" style="--value:70;" role="progressbar" aria-label="Primary Radial Progressbar">70%</div> --}}
     @else
       <video src="{{ $eventSlideshowUrl }}" class="py-4 mx-auto rounded" controls></video>
     @endif
