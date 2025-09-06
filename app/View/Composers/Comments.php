@@ -29,7 +29,7 @@ class Comments extends Composer
             'next' => $this->next(),
             'paginated' => $this->paginated(),
             'closed' => $this->closed(),
-            'commentFormArgs' => $this->commentFormArgs()
+            'commentFormArgs' => $this->commentFormArgs(),
         ];
     }
 
@@ -122,11 +122,11 @@ class Comments extends Composer
     {
         global $post;
 
-        $post_id       = $post->ID;
-        $user          = wp_get_current_user();
+        $post_id = $post->ID;
+        $user = wp_get_current_user();
         $user_identity = $user->exists() ? $user->display_name : '';
-        $required_indicator = ' ' . wp_required_field_indicator();
-        $required_text      = ' ' . wp_required_field_message();
+        $required_indicator = ' '.wp_required_field_indicator();
+        $required_text = ' '.wp_required_field_message();
         $required_attribute = ' required="required"';
 
         $loggedInAsHtmlInner = sprintf(
@@ -157,16 +157,17 @@ class Comments extends Composer
                 _x('Comment', 'noun'),
                 $required_indicator
             ),
-            '<textarea id="comment" class="textarea max-w-sm text-base-content" name="comment" cols="45" rows="8" maxlength="65525"' . $required_attribute . '></textarea>'
+            '<textarea id="comment" class="textarea max-w-sm text-base-content" name="comment" cols="45" rows="8" maxlength="65525"'.$required_attribute.'></textarea>'
         );
 
-        $commentFormArgs = array(
+        $commentFormArgs = [
             'title_reply_before' => '<h3 id="reply-title" class="comment-reply-title text-primary/90 text-2xl">',
             'logged_in_as' => $loggedInAsHtml,
             'comment_field' => $commentField,
             'submit_field' => '<p class="form-submit py-3">%1$s %2$s</p>',
-            'submit_button' => '<input name="%1$s" type="submit" id="%2$s" class="%3$s btn btn-primary" value="%4$s" />'
-        );
+            'submit_button' => '<input name="%1$s" type="submit" id="%2$s" class="%3$s btn btn-primary" value="%4$s" />',
+        ];
+
         return $commentFormArgs;
     }
 }

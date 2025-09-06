@@ -126,10 +126,10 @@ add_action('widgets_init', function () {
 });
 
 add_action('after_setup_theme', function () {
-    load_theme_textdomain('sage', get_template_directory() . '/resources/lang');
+    load_theme_textdomain('sage', get_template_directory().'/resources/lang');
 });
 
-// Replace Posts label as Articles in Admin Panel 
+// Replace Posts label as Articles in Admin Panel
 add_action('init', function () {
     global $wp_post_types;
     $labels = &$wp_post_types['post']->labels;
@@ -157,9 +157,9 @@ add_action('admin_menu', function () {
 
 add_action('init', function () {
     $post_type_object = get_post_type_object('post');
-    $post_type_object->template = array(
-        array('core/gallery'),
-    );
+    $post_type_object->template = [
+        ['core/gallery'],
+    ];
 });
 
 /**
@@ -167,7 +167,7 @@ add_action('init', function () {
  */
 add_action('after_switch_theme', function () {
     $login_page = get_page_by_path('login');
-    if (!$login_page) {
+    if (! $login_page) {
         $page_id = wp_insert_post([
             'post_title' => 'Connexion',
             'post_name' => 'login',
@@ -176,7 +176,7 @@ add_action('after_switch_theme', function () {
             'post_type' => 'page',
             'post_author' => 1,
         ]);
-        
+
         if ($page_id) {
             update_post_meta($page_id, '_wp_page_template', 'page-login.blade.php');
         }
@@ -191,8 +191,9 @@ add_filter('logout_url', function ($logout_url, $redirect) {
     if ($login_page) {
         $custom_redirect = $redirect ? $redirect : get_permalink($login_page->ID);
         // Build logout URL manually to avoid infinite loops
-        $logout_url = home_url('/wp/wp-login.php?action=logout&redirect_to=' . urlencode($custom_redirect) . '&_wpnonce=' . wp_create_nonce('log-out'));
+        $logout_url = home_url('/wp/wp-login.php?action=logout&redirect_to='.urlencode($custom_redirect).'&_wpnonce='.wp_create_nonce('log-out'));
     }
+
     return $logout_url;
 }, 10, 2);
 
@@ -201,12 +202,12 @@ add_filter('logout_url', function ($logout_url, $redirect) {
  */
 add_action('wp_before_admin_bar_render', function () {
     global $wp_admin_bar;
-    
+
     $login_page = get_page_by_path('login');
     if ($login_page) {
         // Remove default logout menu
         $wp_admin_bar->remove_menu('logout');
-        
+
         // Add custom logout menu under user menu
         $wp_admin_bar->add_menu([
             'id' => 'logout',
@@ -225,19 +226,19 @@ add_action('wp_before_admin_bar_render', function () {
  */
 add_action('template_redirect', function () {
     // Only process on login page and if form is submitted
-    if (!is_page('login') || !isset($_POST['wp-submit'])) {
+    if (! is_page('login') || ! isset($_POST['wp-submit'])) {
         return;
     }
-    
+
     // Process login
     $user_login = sanitize_user($_POST['log']);
     $user_password = $_POST['pwd'];
     $remember = isset($_POST['rememberme']);
     $redirect_to = isset($_POST['redirect_to']) ? $_POST['redirect_to'] : home_url('/');
-    
+
     // Attempt login
     $user = wp_authenticate($user_login, $user_password);
-    
+
     if (is_wp_error($user)) {
         // Login failed, redirect back with error
         wp_redirect(add_query_arg('login', 'failed', get_permalink(get_page_by_path('login')->ID)));
@@ -246,7 +247,7 @@ add_action('template_redirect', function () {
         // Login successful
         wp_set_current_user($user->ID);
         wp_set_auth_cookie($user->ID, $remember);
-        
+
         // Redirect to intended page
         wp_redirect($redirect_to);
         exit;
@@ -262,22 +263,22 @@ add_action('template_redirect', function () {
     if (is_user_logged_in()) {
         return;
     }
-    
+
     // Skip if we're on the login page or admin
     if (is_admin() || is_page('login') || strpos($_SERVER['REQUEST_URI'], '/wp-login.php') !== false) {
         return;
     }
-    
+
     // Skip for AJAX requests
     if (wp_doing_ajax()) {
         return;
     }
-    
+
     // Skip for REST API requests
     if (defined('REST_REQUEST') && REST_REQUEST) {
         return;
     }
-    
+
     // Skip for asset requests (CSS, JS, images, fonts, etc.)
     $request_uri = $_SERVER['REQUEST_URI'];
     $asset_extensions = ['.css', '.js', '.png', '.jpg', '.jpeg', '.gif', '.svg', '.woff', '.woff2', '.ttf', '.eot', '.ico'];
@@ -286,17 +287,17 @@ add_action('template_redirect', function () {
             return;
         }
     }
-    
+
     // Skip for theme assets
     if (strpos($request_uri, '/app/themes/') !== false || strpos($request_uri, '/wp-content/themes/') !== false) {
         return;
     }
-    
+
     // Skip for uploads
     if (strpos($request_uri, '/wp-content/uploads/') !== false) {
         return;
     }
-    
+
     // Redirect to custom login page
     $login_page = get_page_by_path('login');
     if ($login_page) {
@@ -311,16 +312,16 @@ add_action('template_redirect', function () {
 add_action('init', function () {
     if (
         $_SERVER['REQUEST_URI'] !== '/login/'
-        && !str_contains($_SERVER['REQUEST_URI'], '/wp/wp-login.php')
-        && !current_user_can('administrator') // rule to allow admins
+        && ! str_contains($_SERVER['REQUEST_URI'], '/wp/wp-login.php')
+        && ! current_user_can('administrator') // rule to allow admins
         && WP_ENV === 'development'
-        && 'PostmanRuntime/7.42.0' !== $_SERVER['HTTP_USER_AGENT'] // postman
-        && 'Shotstack-Webhook/1.0' !== $_SERVER['HTTP_USER_AGENT'] // shotstack
+        && $_SERVER['HTTP_USER_AGENT'] !== 'PostmanRuntime/7.42.0' // postman
+        && $_SERVER['HTTP_USER_AGENT'] !== 'Shotstack-Webhook/1.0' // shotstack
         && $_SERVER['REMOTE_ADDR'] !== '127.0.0.1' // wp-cli
     ) {
         wp_die(
-            __( 'Briefly unavailable for scheduled maintenance. Check back in a minute.', 'sage' ),
-            __( 'Maintenance' ),
+            __('Briefly unavailable for scheduled maintenance. Check back in a minute.', 'sage'),
+            __('Maintenance'),
             503
         );
     }

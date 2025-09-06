@@ -31,8 +31,9 @@ class Event extends Composer
             'title' => $this->title(),
             'pagination' => $this->pagination(),
             'eventSlideshowUrl' => $this->eventSlideshow(),
-            'eventDate' => $this->getEventDate()
+            'eventDate' => $this->getEventDate(),
         ];
+
         return $data;
     }
 
@@ -83,7 +84,7 @@ class Event extends Composer
     {
         return wp_link_pages([
             'echo' => 0,
-            'before' => '<p>' . __('Pages:', 'sage'),
+            'before' => '<p>'.__('Pages:', 'sage'),
             'after' => '</p>',
         ]);
     }
@@ -91,15 +92,15 @@ class Event extends Composer
     public function eventSlideshow()
     {
         $attachmentSlideshow = $this->getAttachmentSlideshow();
-        $eventSlideshowUrl = !is_null($attachmentSlideshow) ? $attachmentSlideshow : 'placeholder';
+        $eventSlideshowUrl = ! is_null($attachmentSlideshow) ? $attachmentSlideshow : 'placeholder';
 
         return $eventSlideshowUrl;
     }
 
-    public function getAttachmentSlideshow(): string|null
+    public function getAttachmentSlideshow(): ?string
     {
         $attachmentsSlideshow = get_attached_media('video');
-        if (!empty($attachmentsSlideshow)) {
+        if (! empty($attachmentsSlideshow)) {
             foreach ($attachmentsSlideshow as $attachmentSlideshow) {
                 $pattern = '/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i';
                 if (preg_match($pattern, $attachmentSlideshow->post_name)) {
@@ -107,25 +108,29 @@ class Event extends Composer
                 }
             }
         }
+
         return null;
     }
 
-    public function getEventDate(): string {
-            global $post;
+    public function getEventDate(): string
+    {
+        global $post;
 
-            if ($post instanceof WP_Post) {
-                $eventDate = $post->post_date;
-                $date = new DateTime($eventDate);
-                $fmt = new IntlDateFormatter(
-                    'fr_FR',
-                    IntlDateFormatter::FULL,
-                    IntlDateFormatter::FULL,
-                    'America/Los_Angeles',
-                    IntlDateFormatter::GREGORIAN,
-                    'EEEE d LLLL r'
-                );
-                return $fmt->format($date);
-            }
-            return '';
+        if ($post instanceof WP_Post) {
+            $eventDate = $post->post_date;
+            $date = new DateTime($eventDate);
+            $fmt = new IntlDateFormatter(
+                'fr_FR',
+                IntlDateFormatter::FULL,
+                IntlDateFormatter::FULL,
+                'America/Los_Angeles',
+                IntlDateFormatter::GREGORIAN,
+                'EEEE d LLLL r'
+            );
+
+            return $fmt->format($date);
+        }
+
+        return '';
     }
 }
