@@ -7,7 +7,7 @@ use IntlDateFormatter;
 use Roots\Acorn\View\Composer;
 use WP_Post;
 
-class Post extends Composer
+class Event extends Composer
 {
     /**
      * List of views served by this composer.

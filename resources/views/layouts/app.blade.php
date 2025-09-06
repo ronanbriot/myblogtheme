@@ -24,11 +24,7 @@
         @php($topPaddingMain = 'sm:pt-[26px]')
       @endif
       <main id="main" class="main container mx-auto flex flex-col justify-center {{ $topPaddingMain }} pb-56 md:pb-32">
-        @if (is_user_logged_in())
-          @yield('content')
-        @else
-          @include('forms.login')
-        @endif
+        @yield('content')
       </main>
 
       @hasSection('sidebar')
