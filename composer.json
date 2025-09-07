@@ -46,7 +46,7 @@
     "symfony/string": "^6.4"
   },
   "require-dev": {
-    "laravel/pint": "^1.13",
+    "laravel/pint": "1.20.0",
     "phpunit/phpunit": "^9.0",
     "yoast/phpunit-polyfills": "^4.0"
   },
