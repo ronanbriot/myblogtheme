@@ -40,7 +40,9 @@ if (! function_exists('\Roots\bootloader')) {
     );
 }
 
-\Roots\bootloader()->boot();
+if (WP_ENV !== 'testing') {
+    \Roots\bootloader()->boot();
+}
 
 /*
 |--------------------------------------------------------------------------

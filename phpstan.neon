@@ -1,0 +1,22 @@
+parameters:
+    level: 5
+    paths:
+        - app/
+        - tests/
+    ignoreErrors:
+        # Ignorer les méthodes d'assertion PHPUnit dans les tests
+        - '#Call to an undefined method Tests\\Unit\\View\\Composers\\TimelineComposerTest::assertIsArray\(\)#'
+        - '#Call to an undefined method Tests\\Unit\\View\\Composers\\TimelineComposerTest::assertArrayHasKey\(\)#'
+        - '#Call to an undefined method Tests\\Unit\\View\\Composers\\TimelineComposerTest::assertObjectHasProperty\(\)#'
+        - '#Call to an undefined method Tests\\Unit\\View\\Composers\\TimelineComposerTest::assertIsString\(\)#'
+        - '#Call to an undefined method Tests\\Unit\\View\\Composers\\TimelineComposerTest::assertIsInt\(\)#'
+        - '#Call to an undefined method Tests\\Unit\\View\\Composers\\TimelineComposerTest::assertContains\(\)#'
+        - '#Call to an undefined method Tests\\Unit\\View\\Composers\\TimelineComposerTest::assertStringStartsWith\(\)#'
+        - '#Call to an undefined method Tests\\Unit\\View\\Composers\\TimelineComposerTest::assertStringContainsString\(\)#'
+        - '#Call to an undefined method Tests\\Unit\\View\\Composers\\TimelineComposerTest::assertNotEmpty\(\)#'
+        - '#Call to an undefined method Tests\\Unit\\View\\Composers\\TimelineComposerTest::assertLessThanOrEqual\(\)#'
+        - '#Call to an undefined method Tests\\Unit\\View\\Composers\\TimelineComposerTest::assertGreaterThanOrEqual\(\)#'
+        - '#Call to an undefined method Tests\\Unit\\View\\Composers\\TimelineComposerTest::assertGreaterThan\(\)#'
+        - '#Call to an undefined method Tests\\Unit\\View\\Composers\\TimelineComposerTest::assertInstanceOf\(\)#'
+    excludePaths:
+        - vendor/

@@ -160,6 +160,11 @@ class TimelineComposer extends Composer
             'current_page' => (int) $page,
         ];
 
+        // En mode test, retourner les données au lieu d'envoyer du JSON
+        if (defined('WP_ENV') && WP_ENV === 'testing') {
+            return $response_data;
+        }
+
         wp_send_json_success($response_data);
     }
 }

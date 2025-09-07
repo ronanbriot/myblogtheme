@@ -46,7 +46,9 @@
     "symfony/string": "^6.4"
   },
   "require-dev": {
-    "laravel/pint": "^1.13"
+    "laravel/pint": "^1.13",
+    "phpunit/phpunit": "^9.0",
+    "yoast/phpunit-polyfills": "^4.0"
   },
   "suggest": {
     "log1x/sage-directives": "A collection of useful Blade directives for WordPress and Sage (^1.0)."
@@ -68,6 +70,9 @@
   "scripts": {
     "post-autoload-dump": [
       "Roots\\Acorn\\ComposerScripts::postAutoloadDump"
-    ]
+    ],
+    "test": "./vendor/bin/phpunit",
+    "test-coverage": "./vendor/bin/phpunit --coverage-html coverage",
+    "test-wp": "php run-wp-tests.php"
   }
 }
