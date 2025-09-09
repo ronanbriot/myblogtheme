@@ -40,7 +40,7 @@ jobs:
           cat public/manifest.json
 
   php:
-    name: PHP ${{ matrix.php }}
+    name: Pint
     runs-on: ubuntu-latest
     if: "!contains(github.event.head_commit.message, '[ci skip]')"
     strategy:
@@ -74,7 +74,7 @@ jobs:
 
       - name: Run Pint
         run: vendor/bin/pint --test
-        
+
   phpunit:
     name: Run tests
     runs-on: ubuntu-latest
@@ -101,6 +101,19 @@ jobs:
         with:
           php-version: ${{ matrix.php-version }}
           tools: phpunit-polyfills:1.1
+
+      - name: Restore the Composer cache directory
+        id: composercache
+        run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
+
+      - uses: actions/cache@v4
+        with:
+          path: ${{ steps.composercache.outputs.dir }}
+          key: ${{ runner.os }}-${{ matrix.php-version }}-composer-${{ hashFiles('**/composer.json') }}
+          restore-keys: ${{ runner.os }}-${{ matrix.php-version }}-composer-
+
+      - name: Install Composer dependencies
+        run: composer install --no-progress --prefer-dist --optimize-autoloader
 
       - name: Setup tests
         run: bash bin/install-wp-tests.sh wordpress_tests root root 127.0.0.1 latest true
